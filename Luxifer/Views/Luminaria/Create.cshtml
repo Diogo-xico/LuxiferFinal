@@ -1,0 +1,248 @@
+﻿@model Luminaria
+@{
+    ViewData["Title"] = "Create";
+}
+<head>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        #map {
+            height: 350px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <aside id="sidebar">
+            <div class="top">
+                <div class="logo">
+                    <img src="/images/logo.png" alt="" />
+                    <h2>LUX<span class="color-primary">IFER</span></h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp"> close </span>
+                </div>
+            </div>
+            <div class="sidebar">
+                <a asp-area="" asp-controller="Home" asp-action="Index">
+                    <span class="material-icons-sharp"> dashboard </span>
+                    <h3>Dashboard</h3>
+                </a>
+                <a asp-area="" asp-controller="Clientes" asp-action="Index" class="active">
+                    <span class="material-icons-sharp"> groups </span>
+                    <h3>Clientes</h3>
+                </a>
+                <a asp-area="" asp-controller="Luminarias" asp-action="Index">
+                    <span class="material-icons-sharp"> lightbulb </span>
+                    <h3>Luminárias</h3>
+                </a>
+                <a asp-area="" asp-controller="Grupos" asp-action="Index">
+                    <span class="material-icons-sharp"> lightbulb </span>
+                    <h3>Grupos</h3>
+                </a>
+                <a asp-area="" asp-controller="Home" asp-action="HelpCenter">
+                    <span class="material-icons-sharp"> help </span>
+                    <h3>Help Center</h3>
+                </a>
+                <a asp-area="" asp-controller="Settings" asp-action="Index">
+                    <span class="material-icons-sharp"> settings </span>
+                    <h3>Settings</h3>
+                </a>
+                <a asp-area="" asp-controller="Home" asp-action="Index">
+                    <span class="material-icons-sharp"> logout </span>
+                    <h3>Logout</h3>
+                </a>
+            </div>
+        </aside>
+
+
+        <main>
+
+            <hr />
+           
+                <div id="map"></div>
+           
+            
+
+            <div class="formulario">
+                <h1 class="form-title">Associar Luminária</h1>
+                <form asp-controller="Luminaria" asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="main-user-info">
+
+                        <div class="txt_field">
+                            <input asp-for="Modelo" type="text" required>
+                            <span></span>
+                            <label >Modelo</label>
+                            <span  class="text-danger"></span>    
+                        </div>
+                        <div class="txt_field">
+                            <input asp-for="Cidade" type="text" required>
+                            <span></span>
+                            <label>Cidade</label>
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="txt_field">
+                            <input asp-for="Pais" type="text" required>
+                            <span></span>
+                            <label>País</label>
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="txt_field">
+                            <input asp-for="Latitude" type="text" id="input1" required>
+                            <span></span>
+                            <label>Latitude</label>
+                            <span  class="text-danger"></span>    
+                        </div>
+                        <div class="txt_field">
+                            <input asp-for="Longitude" type="text" id="input2" required>
+                            <span></span>
+                            <label>Longitude</label>
+                            <span class="text-danger"></span>
+                        </div>
+                        
+                        <div class="form-submit-btn">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>
+                
+                    </div>
+
+                    
+                </form>
+            </div>
+
+        </main>
+
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+                <div class="theme-toggler">
+                    <span class="material-icons-sharp active">light_mode</span>
+                    <span class="material-icons-sharp">dark_mode</span>
+                </div>
+                <div class="profile">
+                    <div class="info">
+                        <p>Olá, <b>Diogo</b></p>
+                        <small class="text-muted">Admin</small>
+                    </div>
+                    <div class="profile-photo">
+                        <img src="/images/foto.jpeg" alt="" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="estatisticas">
+                <div class="header">
+                    <h1>Estatisticas</h1>
+                    <a href="#">More<span class="material-icons-sharp">chevron_right</span></a>
+                </div>
+                <div class="estatistica">
+                    <span class="material-icons-sharp"> lightbulb </span>
+                    <h4>Data de instalação</h4>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                </div>
+                <div class="estatistica">
+                    <span class="material-icons-sharp"> lightbulb </span>
+                    <h4>Última revisão</h4>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="estatisticas">
+                <div class="header">
+                    <h1>Estatisticas</h1>
+                    <a href="#">More<span class="material-icons-sharp">chevron_right</span></a>
+                </div>
+                <div class="estatistica">
+                    <span class="material-icons-sharp"> lightbulb </span>
+                    <h4>Data de instalação</h4>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                </div>
+                <div class="estatistica">
+                    <span class="material-icons-sharp"> lightbulb </span>
+                    <h4>Última revisão</h4>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./index.js"></script>
+    <script>
+        // Initialize the map
+        var map = L.map('map').setView([0, 0], 2);
+
+        // Create the tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Define a variable for the marker
+        var marker;
+
+        // Function to handle the map click event
+        function onMapClick(e) {
+            if (marker) {
+                map.removeLayer(marker);
+            }
+
+            marker = L.marker(e.latlng).addTo(map);
+            document.getElementById("input1").value = e.latlng.lat;
+            document.getElementById("input2").value = e.latlng.lng;
+        }
+
+        // Add the map click event listener
+        map.on('click', onMapClick);
+    </script>
+
+</body>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

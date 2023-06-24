@@ -1,0 +1,334 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<head>
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        #map {
+            height: 350px;
+        }
+
+    </style>
+
+
+</head>
+
+
+<body>
+    <div class="container">
+        <aside id="sidebar">
+            <div class="top">
+                <div class="logo">
+                    <img src="./images/logo.png" alt="" />
+                    <h2>LUX<span class="color-primary">IFER</span></h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp"> close </span>
+                </div>
+            </div>
+            <div class="sidebar">
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="active">
+                    <span class="material-icons-sharp"> dashboard </span>
+                    <h3>Dashboard</h3>
+                </a>
+                <a asp-area="" asp-controller="Clientes" asp-action="Index">
+                    <span class="material-icons-sharp"> groups </span>
+                    <h3>Clientes</h3>
+                </a>
+                <a asp-area="" asp-controller="Luminaria" asp-action="Index">
+                    <span class="material-icons-sharp"> lightbulb </span>
+                    <h3>Luminárias</h3>
+                </a>
+                <a asp-area="" asp-controller="Grupos" asp-action="Index">
+                    <span class="material-icons-sharp"> lightbulb </span>
+                    <h3>Grupos</h3>
+                </a>
+                <a asp-area="" asp-controller="Home" asp-action="HelpCenter">
+                    <span class="material-icons-sharp"> help </span>
+                    <h3>Help Center</h3>
+                </a>
+                <a asp-area="" asp-controller="Settings" asp-action="Index">
+                    <span class="material-icons-sharp"> settings </span>
+                    <h3>Settings</h3>
+                </a>
+                <a asp-area="" asp-controller="Home" asp-action="Index">
+                    <span class="material-icons-sharp"> logout </span>
+                    <h3>Logout</h3>
+                </a>
+            </div>
+        </aside>
+
+        <main>
+            <div class="headerClientes">
+                <h1>Overview</h1>
+            </div>
+
+
+            <div class="insights">
+                <!--GRUPOS ATIVOS-->
+                <div class="gruposAtivos">
+                    <span class="material-icons-sharp"> lightbulb </span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Grupos Ativos</h3>
+                            <h1>3</h1>
+                        </div>
+                        <div class="progress">
+                            <svg>
+                                <circle cx="38" cy="38" r="36"></circle>
+                            </svg>
+                            <div class="number">
+                                <p>40%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <small class="text-muted">Last 1 hour</small>
+                </div>
+
+                <!--LUMINARIAS ATIVAS-->
+                <div class="luminariasAtivas">
+                    <span class="material-icons-sharp"> lightbulb </span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Luminárias Ativas</h3>
+                            <h1>10</h1>
+                        </div>
+                        <div class="progress">
+                            <svg>
+                                <circle cx="38" cy="38" r="36"></circle>
+                            </svg>
+                            <div class="number">
+                                <p>70%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <small class="text-muted">Last 1 hour</small>
+                </div>
+                <!--LUMINARIAS AVARIADAS-->
+                <div class="luminariasAvariadas">
+                    <span class="material-icons-sharp"> lightbulb </span>
+                    <div class="middle">
+                        <div class="left">
+                            <h3>Luminárias Avariadas</h3>
+                            <h1>0</h1>
+                        </div>
+                        <div class="progress">
+                            <svg>
+                                <circle cx="38" cy="38" r="36"></circle>
+                            </svg>
+                            <div class="number">
+                                <p>0%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <small class="text-muted">Last 1 hour</small>
+                </div>
+            </div>
+            <div id="map"></div>
+
+            <canvas id="chart"></canvas>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+
+            <div class="chartBox">
+                <canvas id="myChart"></canvas>
+            </div>
+
+            <script>
+                const x_vals = [
+                    0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 10.5, 11.5, 12.5,
+                    13.5, 14.5, 15.5, 16.5, 17.5, 18.5, 19.5, 20.5, 21.5, 22.5, 23.5,
+                ];
+                const y_vals = [
+                    10, 10, 10, 10, 40, 40, 40, 47, 0, 0, 0, 0, 16, 32, 42, 30, 17, 11,
+                    5, 8, 24, 16, 32, 42,
+                ];
+                const data = x_vals.map((k, i) => ({ x: k, y: y_vals[i] }));
+
+                const backgroundColor1 = Array(x_vals.length).fill(
+                    "rgba(255, 99, 132, 0.2)"
+                );
+                const borderColor1 = Array(x_vals.length).fill(
+                    "rgba(255, 99, 132, 1)"
+                );
+
+                const ctx = document.getElementById("myChart").getContext("2d");
+                const myChart = new Chart(ctx, {
+                    type: "bar",
+                    data: {
+                        datasets: [
+                            {
+                                label: "Intensidade Luminária",
+                                data: data,
+                                backgroundColor: backgroundColor1,
+                                borderColor: borderColor1,
+                                borderWidth: 1,
+                                barPercentage: 1,
+                                categoryPercentage: 1,
+                                borderRadius: 5,
+                            },
+                        ],
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                type: "linear",
+                                offset: false,
+                                grid: {
+                                    offset: false,
+                                },
+                                ticks: {
+                                    stepSize: 1,
+                                },
+                                title: {
+                                    display: true,
+                                    text: "Horas",
+                                    font: {
+                                        size: 14,
+                                    },
+                                },
+                            },
+                            y: {
+                                // beginAtZero: true
+                                title: {
+                                    display: true,
+                                    text: "Intensidade",
+                                    font: {
+                                        size: 14,
+                                    },
+                                },
+                            },
+                        },
+                        plugins: {
+                            legend: {
+                                display: false,
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    title: (items) => {
+                                        if (!items.length) {
+                                            return "";
+                                        }
+                                        const item = items[0];
+                                        const x = item.parsed.x;
+                                        const min = x - 0.5;
+                                        const max = x + 0.5;
+                                        return `Hours: ${min} - ${max}`;
+                                    },
+                                },
+                            },
+                        },
+                    },
+                });
+            </script>
+        </main>
+
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+                <div class="theme-toggler">
+                    <span class="material-icons-sharp active">light_mode</span>
+                    <span class="material-icons-sharp">dark_mode</span>
+                </div>
+                <div class="profile">
+                    <div class="info">
+                        <p>Olá, <b>Diogo</b></p>
+                        <small class="text-muted">Admin</small>
+                    </div>
+                    <div class="profile-photo">
+                        <img src="./images/foto.jpeg" alt="" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="estatisticas">
+                <div class="header">
+                    <h1>Estatisticas</h1>
+                    <a href="#">More<span class="material-icons-sharp">chevron_right</span></a>
+                </div>
+                <div class="estatistica">
+                    <span class="material-icons-sharp"> lightbulb </span>
+                    <h4>Data de instalação</h4>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                </div>
+                <div class="estatistica">
+                    <span class="material-icons-sharp"> lightbulb </span>
+                    <h4>Última revisão</h4>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="estatisticas">
+                <div class="header">
+                    <h1>Estatisticas</h1>
+                    <a href="#">More<span class="material-icons-sharp">chevron_right</span></a>
+                </div>
+                <div class="estatistica">
+                    <span class="material-icons-sharp"> lightbulb </span>
+                    <h4>Data de instalação</h4>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                </div>
+                <div class="estatistica">
+                    <span class="material-icons-sharp"> lightbulb </span>
+                    <h4>Última revisão</h4>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js"
+            integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/mapa.js" asp-append-version="true"></script>
+</body>
+
