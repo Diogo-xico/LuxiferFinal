@@ -1,0 +1,77 @@
+﻿@model Login
+
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Luxifer</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
+          rel="stylesheet" />
+    <link rel="stylesheet" href="~/Luxifer.styles.css" asp-append-version="true" />
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+          integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+          crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+            integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+            crossorigin=""></script>
+    <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+
+
+</head>
+
+@if (TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" aria-label="Close">X</button>
+        @TempData ["MensagemErro"]
+    </div>
+}
+<body>
+    <div class="container">
+        <div class="form-box">
+            <h1 id="title">Login</h1>
+            <form asp-controller="Login" asp-action="Entrar" method="post">
+                <div class="input-group">
+
+                    <div class="input-field">
+                        <i class="fa-solid fa-envelope"></i>
+                        <input type="text" asp-for="Email" placeholder="Email" id="email">
+                        @Html.ValidationMessageFor(x => x.Email)
+                    </div>
+
+                    <div class="input-field">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" asp-for="Password" placeholder="Password" id="password">
+                        @Html.ValidationMessageFor(x => x.Password)
+                    </div>
+
+                    <div class="btn-field">
+                        <button type="submit" id="signupBtn">Entrar</button>
+
+                    </div>
+                    @*<p>Esqueceu sua senha? <a href="#">Clica Aqui!</a></p>*@
+                </div>
+                
+            </form>
+        </div>
+    </div>
+
+
+    <main role="main">
+        @RenderBody()
+    </main>
+    
+    
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

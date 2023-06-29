@@ -1,0 +1,219 @@
+﻿@model List<Grupo>
+
+@{
+    ViewData["Title"] = "Grupos";
+}
+<head>
+    <link href="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        #map {
+            height: 350px;
+        }
+
+        .header-center {
+            text-align: center !important;
+        }
+
+        table.dataTable thead tr {
+            background-color: #e03840;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="container">
+
+        <main>
+
+            <div class="headerClientes">
+                <h1>Os seus Grupos</h1>
+                <button class="modern-button">
+                    <span class="material-icons-sharp"> person_add </span>
+                    <a asp-area="" asp-controller="Grupos" asp-action="Create"><h2>Criar Grupo</h2></a>
+                </button>
+            </div>
+
+
+            <div class="grupos-luminarias">
+                <table id="table-luminarias">
+                    <thead>
+                        <tr>
+                            <th class="center-text">ID</th>
+                            <th>Nome</th>
+                            <th>Cor</th>
+                            <th>User Associado</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.Nome</td>
+                                    <td>@item.Cor</td>
+                                    <td>@item.UserId</td>
+                                    <td class="primary">
+                                        <a asp-controller="Grupos" asp-action="Details" asp-route-id="@item.Id">Detalhes</a>
+                                    </td>
+                                    <td class="primary">
+                                        <a asp-controller="Grupos" asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                                    </td>
+                                    <td>
+                                        <a asp-controller="Grupos" asp-action="Delete" asp-route-id="@item.Id">
+                                            <span class="material-icons-sharp"> delete </span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            @*<div class="headerClientes">
+            <h1>As suas Luminárias</h1>
+
+            </div>
+
+            <div class="grupos-luminarias">
+            <table id="table-luminarias">
+            <thead>
+            <tr>
+            <th class="center-text">ID</th>
+            <th>Modelo</th>
+            <th>Pais</th>
+            <th>Cidade</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th></th>
+            <th></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            @if (Model != null && Model.Luminarias.Any())
+            {
+            foreach (var item in Model.Luminarias)
+            {
+            <tr>
+            <td>@item.Id</td>
+            <td>@item.Modelo</td>
+            <td>@item.Pais</td>
+            <td>@item.Cidade</td>
+            <td>@item.Latitude</td>
+            <td>@item.Longitude</td>
+            <td class="primary">
+            <a asp-controller="Luminaria" asp-action="Edit" asp-route-id="@item.Id">Informações</a>
+            </td>
+            </tr>
+            }
+            }
+            </tbody>
+            </table>
+            </div>*@
+
+        </main>
+
+        <div class="right">
+        <div class="top">
+        <button id="menu-btn">
+        <span class="material-icons-sharp">menu</span>
+        </button>
+        <div class="theme-toggler">
+        <span class="material-icons-sharp active">light_mode</span>
+        <span class="material-icons-sharp">dark_mode</span>
+        </div>
+        
+        </div>
+
+       @* <div class="estatisticas">
+        <div class="header">
+        <h1>Estatisticas</h1>
+        <a href="#">More<span class="material-icons-sharp">chevron_right</span></a>
+        </div>
+        <div class="estatistica">
+        <span class="material-icons-sharp"> lightbulb </span>
+        <h4>Data de instalação</h4>
+        <div class="date-time">
+        <p>7 Nov, 2021</p>
+        <small class="text-muted">9:14pm</small>
+        </div>
+        <div class="date-time">
+        <p>7 Nov, 2021</p>
+        <small class="text-muted">9:14pm</small>
+        </div>
+        <div class="date-time">
+        <p>7 Nov, 2021</p>
+        <small class="text-muted">9:14pm</small>
+        </div>
+        </div>
+        <div class="estatistica">
+        <span class="material-icons-sharp"> lightbulb </span>
+        <h4>Última revisão</h4>
+        <div class="date-time">
+        <p>7 Nov, 2021</p>
+        <small class="text-muted">9:14pm</small>
+        </div>
+        <div class="date-time">
+        <p>7 Nov, 2021</p>
+        <small class="text-muted">9:14pm</small>
+        </div>
+        <div class="date-time">
+        <p>7 Nov, 2021</p>
+        <small class="text-muted">9:14pm</small>
+        </div>
+        </div>
+        </div>*@
+  
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table-luminarias').DataTable({
+                "ordering": true,
+                "paging": true,
+                "searching": true,
+                "oLanguage": {
+                    "sEmptyTable": "Nenhum registo encontrado na tabela",
+                    "sInfo": "Mostrar START até END de TOTAL Luminárias",
+                    "sInfoEmpty": "Mostrar 0 até 0 de 0 Luminárias",
+                    "sInfoFiltered": "(Filtrar de MAX total Luminárias)",
+                    "sInfoPostFix": "",
+                    "sInfoThousands": ".",
+                    "sLengthMenu": "Mostrar MENU Luminárias por página",
+                    "sLoadingRecords": "A carregar...",
+                    "sProcessing": "A processar...",
+                    "sZeroRecords": "Nenhuma Luminária encontrado",
+                    "sSearch": "Pesquisar",
+                    "oPaginate": {
+                        "sNext": "Próximo",
+                        "sPrevious": "Anterior",
+                        "sFirst": "Primeiro",
+                        "sLast": "Último"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Ordenar colunas de forma ascendente",
+                        "sSortDescending": ": Ordenar colunas de forma descendente"
+                    }
+                },
+                "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "Todos"]],
+                "columnDefs": [
+                    { "className": "header-center", "targets": "_all" }
+                ]
+            });
+        });
+    </script>
+
+</body>

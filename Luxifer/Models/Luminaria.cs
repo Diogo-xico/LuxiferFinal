@@ -1,4 +1,6 @@
-﻿namespace Luxifer.Models
+﻿using System.Reflection.Metadata.Ecma335;
+
+namespace Luxifer.Models
 {
     public class Luminaria
     {
@@ -10,5 +12,11 @@
 
         public string Latitude { get; set; }
         public string Longitude { get; set; }
+
+        public int? UserId { get; set; }
+        public User User{ get; set; }
+
+        public int? GrupoId { get; set; }
+        public Grupo Grupo { get; set; }
     }
 }

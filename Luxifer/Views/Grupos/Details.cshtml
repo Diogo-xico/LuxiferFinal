@@ -1,0 +1,206 @@
+﻿@model Luxifer.Models.MultipleModels;
+
+
+@{
+    ViewData["Title"] = "Details";
+}
+<header>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        #map {
+            height: 350px;
+        }
+    </style>
+</header>
+
+<body>
+    <div class="container">
+
+        <main>
+            <div class="headerClientes">
+                <div class="header-titulo"><h1>Luminários do Grupo - @Html.DisplayFor(model => @Model.Grupo.Nome)</h1></div>
+            </div>
+            @*<div class="esquerda">
+            <div class="profile-photo1">
+            <img src="/images/foto.jpeg" alt="" />
+            </div>
+            </div>*@
+
+            <div class="grupos-luminarias">
+                <table id="table-luminarias">
+                    <thead>
+                        <tr>
+                            <th class="center-text">ID</th>
+                            <th>Modelo</th>
+                            <th>Pais</th>
+                            <th>Cidade</th>
+                            <th>Latitude</th>
+                            <th>Longitude</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @if (Model != null && Model.Luminarias.Any())
+                        {
+                            foreach (var item in Model.Luminarias)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.Modelo</td>
+                                    <td>@item.Pais</td>
+                                    <td>@item.Cidade</td>
+                                    <td>@item.Latitude</td>
+                                    <td>@item.Longitude</td>
+                                    <td class="primary">
+                                        <a asp-controller="Luminaria" asp-action="Details" asp-route-id="@item.Id">Informações</a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            @*<div>
+            <button class="modern-button1"><span class="material-icons-sharp"> edit </span><a asp-action="Edit" asp-route-id="@Model?.Id"><h2>Editar Cliente</h2></a></button
+            </div>*@
+        </main>
+
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+                <div class="theme-toggler">
+                    <span class="material-icons-sharp active">light_mode</span>
+                    <span class="material-icons-sharp">dark_mode</span>
+                </div>
+                
+            </div>
+
+            @*<div class="estatisticas">
+                <div class="header">
+                    <h1>Luminárias</h1>
+                    <a href="#">More<span class="material-icons-sharp">chevron_right</span></a>
+                </div>
+
+
+                <div class="estatistica">
+
+                    <span class="material-icons-sharp"> lightbulb </span>
+                    <h4>LAMP7818181</h4>
+                    <h4></h4>
+                    <div class="date-time">
+                        <h4>Latitude</h4>
+                        <small class="text-muted">31312312</small>
+                    </div>
+                    <div class="date-time">
+                        <h4>Longitude</h4>
+                        <small class="text-muted">312312</small>
+                    </div>
+                    <div class="date-time">
+                        <p>Estado</p>
+                        <small class="text-muted">Ativa</small>
+                    </div>
+                </div>
+                <div class="estatistica">
+
+                    <span class="material-icons-sharp"> lightbulb </span>
+                    <h4>LAMP7818181</h4>
+                    <h4></h4>
+                    <div class="date-time">
+                        <h4>Latitude</h4>
+                        <small class="text-muted">31312312</small>
+                    </div>
+                    <div class="date-time">
+                        <h4>Longitude</h4>
+                        <small class="text-muted">312312</small>
+                    </div>
+                    <div class="date-time">
+                        <p>Estado</p>
+                        <small class="text-muted">Ativa</small>
+                    </div>
+                </div>
+                <div class="estatistica">
+
+                    <span class="material-icons-sharp"> lightbulb </span>
+                    <h4>LAMP7818181</h4>
+                    <h4></h4>
+                    <div class="date-time">
+                        <h4>Latitude</h4>
+                        <small class="text-muted">31312312</small>
+                    </div>
+                    <div class="date-time">
+                        <h4>Longitude</h4>
+                        <small class="text-muted">312312</small>
+                    </div>
+                    <div class="date-time">
+                        <p>Estado</p>
+                        <small class="text-muted">Ativa</small>
+                    </div>
+                </div>
+                <div class="estatistica">
+
+                    <span class="material-icons-sharp"> lightbulb </span>
+                    <h4>LAMP7818181</h4>
+                    <h4></h4>
+                    <div class="date-time">
+                        <h4>Latitude</h4>
+                        <small class="text-muted">31312312</small>
+                    </div>
+                    <div class="date-time">
+                        <h4>Longitude</h4>
+                        <small class="text-muted">312312</small>
+                    </div>
+                    <div class="date-time">
+                        <p>Estado</p>
+                        <small class="text-muted">Ativa</small>
+                    </div>
+                </div>
+                <div class="estatistica">
+
+                    <span class="material-icons-sharp"> lightbulb </span>
+                    <h4>LAMP7818181</h4>
+                    <h4></h4>
+                    <div class="date-time">
+                        <h4>Latitude</h4>
+                        <small class="text-muted">31312312</small>
+                    </div>
+                    <div class="date-time">
+                        <h4>Longitude</h4>
+                        <small class="text-muted">312312</small>
+                    </div>
+                    <div class="date-time">
+                        <p>Estado</p>
+                        <small class="text-muted">Ativa</small>
+                    </div>
+                </div>
+                <div class="estatistica">
+
+                    <span class="material-icons-sharp"> lightbulb </span>
+                    <h4>LAMP7818181</h4>
+                    <h4></h4>
+                    <div class="date-time">
+                        <h4>Latitude</h4>
+                        <small class="text-muted">31312312</small>
+                    </div>
+                    <div class="date-time">
+                        <h4>Longitude</h4>
+                        <small class="text-muted">312312</small>
+                    </div>
+                    <div class="date-time">
+                        <p>Estado</p>
+                        <small class="text-muted">Ativa</small>
+                    </div>
+                </div>
+
+            </div>*@
+        </div>
+    </div>
+
+    <script src="./index.js"></script>
+    <script src="~/js/mapa.js" asp-append-version="true"></script>
+
+</body>

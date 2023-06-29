@@ -1,4 +1,5 @@
-﻿using Luxifer.Models;
+﻿using Luxifer.Data.Map;
+using Luxifer.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Luxifer.Data
@@ -9,5 +10,18 @@ namespace Luxifer.Data
         {           
         }
         public DbSet<Luminaria> Luminarias { get; set; }
+
+        public DbSet<User> Users { get; set; }
+
+        public DbSet<Grupo> Grupo { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new LuminariaMap());
+            modelBuilder.ApplyConfiguration(new GruposMap());
+
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

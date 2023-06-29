@@ -1,0 +1,201 @@
+﻿@using Luxifer.Enums;
+@model Grupo
+
+@{
+    ViewData["Title"] = "Criar Grupo";
+}
+<head>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        #map {
+            height: 350px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+       
+        <main>
+            <a asp-area="" asp-controller="User" asp-action="Index">
+                <span class="material-icons-sharp">
+                    <span class="material-symbols-sharp">
+                        arrow_back
+                    </span>
+                </span>
+            </a>
+            <hr />          
+
+            <div class="formulario">
+                <h1 class="form-title">Criar Grupo</h1>
+                <form asp-controller="Grupos" asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="main-user-info">
+
+                        <div class="txt_field">
+                            <input asp-for="Nome" type="text" required>
+                            <span></span>
+                            <label>Nome</label>
+                            <span class="text-danger"></span>
+                        </div>
+
+                        
+                        <div class="txt_field">
+                            <span></span>
+                            <select asp-for="Cor" class="form-control">
+                                <option value="">Selecione a cor do grupo</option>
+                                <option value="@CoresGruposEnum.Azul">Azul</option>
+                                <option value="@CoresGruposEnum.Vermelho">Vermelho</option>
+                                <option value="@CoresGruposEnum.Laranja">Laranja</option>
+                                <option value="@CoresGruposEnum.Verde">Verde</option>
+                                <option value="@CoresGruposEnum.Amarelo">Amarelo</option>
+                            </select>
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="form-submit-btn">
+                            <input type="submit" value="Criar" class="btn btn-primary" />
+                        </div>
+
+
+                    </div>
+                    
+                    
+                </form>
+
+            </div>
+
+        </main>
+
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+                <div class="theme-toggler">
+                    <span class="material-icons-sharp active">light_mode</span>
+                    <span class="material-icons-sharp">dark_mode</span>
+                </div>
+                <div class="profile">
+                    <div class="info">
+                        <p>Olá, <b>Diogo</b></p>
+                        <small class="text-muted">Admin</small>
+                    </div>
+                    <div class="profile-photo">
+                        <img src="/images/foto.jpeg" alt="" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="estatisticas">
+                <div class="header">
+                    <h1>Estatisticas</h1>
+                    <a href="#">More<span class="material-icons-sharp">chevron_right</span></a>
+                </div>
+                <div class="estatistica">
+                    <span class="material-icons-sharp"> lightbulb </span>
+                    <h4>Data de instalação</h4>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                </div>
+                <div class="estatistica">
+                    <span class="material-icons-sharp"> lightbulb </span>
+                    <h4>Última revisão</h4>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="estatisticas">
+                <div class="header">
+                    <h1>Estatisticas</h1>
+                    <a href="#">More<span class="material-icons-sharp">chevron_right</span></a>
+                </div>
+                <div class="estatistica">
+                    <span class="material-icons-sharp"> lightbulb </span>
+                    <h4>Data de instalação</h4>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                </div>
+                <div class="estatistica">
+                    <span class="material-icons-sharp"> lightbulb </span>
+                    <h4>Última revisão</h4>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                        <small class="text-muted">9:14pm</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./index.js"></script>
+    <script>
+        // Initialize the map
+        var map = L.map('map').setView([0, 0], 2);
+
+        // Create the tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Define a variable for the marker
+        var marker;
+
+        // Function to handle the map click event
+        function onMapClick(e) {
+            if (marker) {
+                map.removeLayer(marker);
+            }
+
+            marker = L.marker(e.latlng).addTo(map);
+            document.getElementById("input1").value = e.latlng.lat;
+            document.getElementById("input2").value = e.latlng.lng;
+        }
+
+        // Add the map click event listener
+        map.on('click', onMapClick);
+    </script>
+
+</body>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

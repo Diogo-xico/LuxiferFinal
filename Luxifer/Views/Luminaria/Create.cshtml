@@ -1,6 +1,6 @@
 ﻿@model Luminaria
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Criar Luminária";
 }
 <head>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -13,57 +13,21 @@
 
 <body>
     <div class="container">
-        <aside id="sidebar">
-            <div class="top">
-                <div class="logo">
-                    <img src="/images/logo.png" alt="" />
-                    <h2>LUX<span class="color-primary">IFER</span></h2>
-                </div>
-                <div class="close" id="close-btn">
-                    <span class="material-icons-sharp"> close </span>
-                </div>
-            </div>
-            <div class="sidebar">
-                <a asp-area="" asp-controller="Home" asp-action="Index">
-                    <span class="material-icons-sharp"> dashboard </span>
-                    <h3>Dashboard</h3>
-                </a>
-                <a asp-area="" asp-controller="Clientes" asp-action="Index" class="active">
-                    <span class="material-icons-sharp"> groups </span>
-                    <h3>Clientes</h3>
-                </a>
-                <a asp-area="" asp-controller="Luminarias" asp-action="Index">
-                    <span class="material-icons-sharp"> lightbulb </span>
-                    <h3>Luminárias</h3>
-                </a>
-                <a asp-area="" asp-controller="Grupos" asp-action="Index">
-                    <span class="material-icons-sharp"> lightbulb </span>
-                    <h3>Grupos</h3>
-                </a>
-                <a asp-area="" asp-controller="Home" asp-action="HelpCenter">
-                    <span class="material-icons-sharp"> help </span>
-                    <h3>Help Center</h3>
-                </a>
-                <a asp-area="" asp-controller="Settings" asp-action="Index">
-                    <span class="material-icons-sharp"> settings </span>
-                    <h3>Settings</h3>
-                </a>
-                <a asp-area="" asp-controller="Home" asp-action="Index">
-                    <span class="material-icons-sharp"> logout </span>
-                    <h3>Logout</h3>
-                </a>
-            </div>
-        </aside>
-
-
+       
         <main>
 
             <hr />
-           
+            <a asp-area="" asp-controller="User" asp-action="Index">
+                <span class="header-titulo material-icons-sharp">
+                    <span class="material-symbols-sharp">
+                        arrow_back
+                    </span>
+                </span>
+            </a>
                 <div id="map"></div>
            
             
-
+            
             <div class="formulario">
                 <h1 class="form-title">Associar Luminária</h1>
                 <form asp-controller="Luminaria" asp-action="Create" method="post">
@@ -77,13 +41,25 @@
                             <span  class="text-danger"></span>    
                         </div>
                         <div class="txt_field">
-                            <input asp-for="Cidade" type="text" required>
+                            <input asp-for="UserId" type="text" id="userIdInput" required>
+                        <span></span>
+                        <label>UserId</label>
+                        <span class="text-danger"></span>
+                        </div>
+                        <div class="txt_field">
+                            <input asp-for="GrupoId" type="text" required>
+                            <span></span>
+                            <label>GrupoId</label>
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="txt_field">
+                            <input asp-for="Cidade" type="text" id="inputCity" required>
                             <span></span>
                             <label>Cidade</label>
                             <span class="text-danger"></span>
                         </div>
                         <div class="txt_field">
-                            <input asp-for="Pais" type="text" required>
+                            <input asp-for="Pais" type="text" id="inputCountry" required>
                             <span></span>
                             <label>País</label>
                             <span class="text-danger"></span>
@@ -100,11 +76,11 @@
                             <label>Longitude</label>
                             <span class="text-danger"></span>
                         </div>
-                        
                         <div class="form-submit-btn">
-                            <input type="submit" value="Create" class="btn btn-primary" />
+                            <input type="submit" value="Criar" class="btn btn-primary" />
                         </div>
-                
+
+                       
                     </div>
 
                     
@@ -121,15 +97,6 @@
                 <div class="theme-toggler">
                     <span class="material-icons-sharp active">light_mode</span>
                     <span class="material-icons-sharp">dark_mode</span>
-                </div>
-                <div class="profile">
-                    <div class="info">
-                        <p>Olá, <b>Diogo</b></p>
-                        <small class="text-muted">Admin</small>
-                    </div>
-                    <div class="profile-photo">
-                        <img src="/images/foto.jpeg" alt="" />
-                    </div>
                 </div>
             </div>
 
@@ -214,19 +181,19 @@
     </div>
 
     <script src="./index.js"></script>
+
+
+   
+
     <script>
-        // Initialize the map
         var map = L.map('map').setView([0, 0], 2);
 
-        // Create the tile layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // Define a variable for the marker
         var marker;
 
-        // Function to handle the map click event
         function onMapClick(e) {
             if (marker) {
                 map.removeLayer(marker);
@@ -235,9 +202,26 @@
             marker = L.marker(e.latlng).addTo(map);
             document.getElementById("input1").value = e.latlng.lat;
             document.getElementById("input2").value = e.latlng.lng;
+
+            // Reverse geocoding using OpenStreetMap (Nominatim)
+            var url = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + e.latlng.lat + '&lon=' + e.latlng.lng;
+
+            fetch(url)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    var city = data.address.city || data.address.town || data.address.village;
+                    var country = data.address.country;
+
+                    document.getElementById("inputCity").value = city;
+                    document.getElementById("inputCountry").value = country;
+                })
+                .catch(function (error) {
+                    console.log('Error:', error);
+                });
         }
 
-        // Add the map click event listener
         map.on('click', onMapClick);
     </script>
 

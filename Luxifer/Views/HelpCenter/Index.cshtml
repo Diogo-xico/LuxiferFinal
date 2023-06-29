@@ -1,0 +1,118 @@
+﻿@{
+    ViewData["Title"] = "HelpCenter";
+}
+<link rel="stylesheet" href="~/css/help.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<body>
+    <div class="container">
+
+        <main>
+          
+            <div class="txte">
+                <div class="esquerda">
+                    <h1>Como podemos ajudar?</h1>
+                    <form method="post">
+                        <div class="txt_field">
+                            <input type="text" required>
+                            <span></span>
+                            <label>Nome</label>
+                        </div>
+                        <div class="txt_field">
+                            <input type="text" required>
+                            <span></span>
+                            <label>Email</label>
+                        </div>
+                        <div class="txt_field">
+                            <input type="text" required>
+                            <span></span>
+                            <label>Assunto</label>
+                        </div>
+                        <input type="submit" value="Submeter">
+                    </form>
+                </div>
+                <div class="direita">
+                    <div>
+                        <ul class="accordion">
+                            <li>
+                                <input type="radio" name="accordion" id="first" checked />
+                                <label for="first">Produtos</label>
+                                <div class="content">
+                                    <p>
+                                        Em linguística, a noção de texto é ampla e ainda aberta a uma definição mais precisa.
+                                        Grosso modo, pode ser entendido como manifestação linguística das ideias de um autor,
+                                        que serão interpretadas pelo leitor de acordo com seus conhecimentos linguísticos e culturais.
+                                        Seu tamanho é variável.
+                                    </p>
+                                </div>
+                            </li>
+                            <li>
+                                <input type="radio" name="accordion" id="second" />
+                                <label for="second">Informação</label>
+                                <div class="content">
+                                    <p>
+                                        Em linguística, a noção de texto é ampla e ainda aberta a uma definição mais precisa.
+                                        Grosso modo, pode ser entendido como manifestação linguística das ideias de um autor,
+                                        que serão interpretadas pelo leitor de acordo com seus conhecimentos linguísticos e culturais.
+                                        Seu tamanho é variável.
+                                    </p>
+                                </div>
+                            </li>
+                            <li>
+                                <input type="radio" name="accordion" id="third" />
+                                <label for="third">Questões</label>
+                                <div class="content">
+                                    <p>
+                                        Em linguística, a noção de texto é ampla e ainda aberta a uma definição mais precisa.
+                                        Grosso modo, pode ser entendido como manifestação linguística das ideias de um autor,
+                                        que serão interpretadas pelo leitor de acordo com seus conhecimentos linguísticos e culturais.
+                                        Seu tamanho é variável.
+                                    </p>
+                                </div>
+                            </li>
+                            <li>
+                                <input type="radio" name="accordion" id="fourth" />
+                                <label for="fourth">Guia</label>
+                                <div class="content">
+                                    <p>
+                                        Em linguística, a noção de texto é ampla e ainda aberta a uma definição mais precisa.
+                                        Grosso modo, pode ser entendido como manifestação linguística das ideias de um autor,
+                                        que serão interpretadas pelo leitor de acordo com seus conhecimentos linguísticos e culturais.
+                                        Seu tamanho é variável.
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+
+
+
+
+                    </div>
+                </div>
+               
+
+              
+            </div>
+
+            
+
+            
+        </main>
+
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+                <div class="theme-toggler">
+                    <span class="material-icons-sharp active">light_mode</span>
+                    <span class="material-icons-sharp">dark_mode</span>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+</body>
+
+
+

@@ -6,7 +6,8 @@ namespace Luxifer.Repository
     public class LuminariaRepo : ILuminariaRepo
     {
         private readonly ApplicationDbContext _applicationDbContext;
-        public LuminariaRepo(ApplicationDbContext applicationDbContext) {
+        public LuminariaRepo(ApplicationDbContext applicationDbContext)
+        {
             _applicationDbContext = applicationDbContext;
         }
 
@@ -15,14 +16,20 @@ namespace Luxifer.Repository
             return _applicationDbContext.Luminarias.FirstOrDefault(X => X.Id == id);
         }
 
-        public List<Luminaria> ListarLuminarias()
+        public List<Luminaria> ListarLuminarias(int UserId)
         {
-            return _applicationDbContext.Luminarias.ToList();
+            return _applicationDbContext.Luminarias.Where(x => x.UserId == UserId).ToList();
+        }
+
+        public List<Luminaria> ListarLuminariasPorGrupoId(int GrupoId)
+        {
+            return _applicationDbContext.Luminarias.Where(x => x.GrupoId == GrupoId).ToList();
         }
 
         public Luminaria Create(Luminaria luminaria)
         {
             _applicationDbContext.Luminarias.Add(luminaria);
+            
             _applicationDbContext.SaveChanges();
             return luminaria;
         }
@@ -45,7 +52,8 @@ namespace Luxifer.Repository
 
         }
 
-        public bool Delete(int id) {
+        public bool Delete(int id)
+        {
             Luminaria luminariaDB = ListarPorId(id);
 
             if (luminariaDB == null) throw new SystemException("Houve um erro na eliminação da Luminária");

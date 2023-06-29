@@ -1,0 +1,29 @@
+﻿@{
+    Layout = "_LayoutVazio";
+    ViewData["Title"] = "Página Restrita";
+}
+<link rel="stylesheet" href="~/css/login.css " asp-append-version="true" />
+<!DOCTYPE html>
+<html lang="pt-pt" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width, intial-scale=1.0" charset="utf-8" />
+    <title>Sign in and Sign Up Form</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="form-box">
+            <h1 id="title">Página não autorizada</h1>
+            <form>
+                <div class="btn-field">
+                    
+                    <a type="button" id="signupBtn" asp-controller="Home" asp-action="Index">Clica aqui para voltares!</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+</body>
+</html>

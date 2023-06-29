@@ -1,6 +1,6 @@
 ﻿@model Luminaria
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Eliminar Luminária";
 }
 <head>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -13,54 +13,54 @@
 
 <body>
     <div class="container">
-        <aside id="sidebar">
-            <div class="top">
-                <div class="logo">
-                    <img src="/images/logo.png" alt="" />
-                    <h2>LUX<span class="color-primary">IFER</span></h2>
-                </div>
-                <div class="close" id="close-btn">
-                    <span class="material-icons-sharp"> close </span>
-                </div>
-            </div>
-            <div class="sidebar">
-                <a asp-area="" asp-controller="Home" asp-action="Index">
-                    <span class="material-icons-sharp"> dashboard </span>
-                    <h3>Dashboard</h3>
-                </a>
-                <a asp-area="" asp-controller="Clientes" asp-action="Index" class="active">
-                    <span class="material-icons-sharp"> groups </span>
-                    <h3>Clientes</h3>
-                </a>
-                <a asp-area="" asp-controller="Luminarias" asp-action="Index">
-                    <span class="material-icons-sharp"> lightbulb </span>
-                    <h3>Luminárias</h3>
-                </a>
-                <a asp-area="" asp-controller="Grupos" asp-action="Index">
-                    <span class="material-icons-sharp"> lightbulb </span>
-                    <h3>Grupos</h3>
-                </a>
-                <a asp-area="" asp-controller="Home" asp-action="HelpCenter">
-                    <span class="material-icons-sharp"> help </span>
-                    <h3>Help Center</h3>
-                </a>
-                <a asp-area="" asp-controller="Settings" asp-action="Index">
-                    <span class="material-icons-sharp"> settings </span>
-                    <h3>Settings</h3>
-                </a>
-                <a asp-area="" asp-controller="Home" asp-action="Index">
-                    <span class="material-icons-sharp"> logout </span>
-                    <h3>Logout</h3>
-                </a>
-            </div>
-        </aside>
-
-
+        
         <main>
 
             <hr />
+            <a asp-area="" asp-controller="User" asp-action="Index">
+                <span class="material-icons-sharp">
+                    <span class="material-symbols-sharp">
+                        arrow_back
+                    </span>
+                </span>
+            </a>«
+            <div class="luminaria-specs">
+                <div class="header">
+                    <span class="material-icons-sharp">lightbulb</span>
 
-            <div class="formulario">
+                    <h2>ID: @Model.Id</h2>
+                </div>
+                <div class="specs-luminaria">
+                    <h1>Geral</h1>
+                    <div class="specs">
+                        <h2>Modelo do Objeto:</h2>
+                        <h2>@Model.Modelo</h2>
+                    </div>                 
+                    <div class="specs">
+                        <h2>Latitude:</h2>
+                        <h2>@Model.Latitude</h2>
+                    </div>
+                    <div class="specs">
+                        <h2>Longitude:</h2>
+                        <h2>@Model.Longitude</h2>
+                    </div>
+                <div class="specs">
+                    <h2>Cidade:</h2>
+                        <h2>@Model.Cidade</h2>
+                </div>
+                <div class="specs">
+                    <h2>País:</h2>
+                    <h2>@Model.Pais</h2>
+                </div>
+                </div>
+            </div>
+            <div class="form-submit-btn">
+            <button class="modern-button1">
+                    <a role="button" asp-action="DeleteFinal" asp-controller="Luminaria" asp-route-id="@Model.Id" class="btn btn-primary"><h2>Eliminar</h2></a>
+            </button>
+            </div>
+
+            @*<div class="formulario">
                 <h1 class="form-title">Eliminar Luminária</h1>
                 
                   
@@ -99,15 +99,13 @@
 
                         </div>
                     </div>
-                        <div class="form-submit-btn">
-                        <button class="modern-button"><a role="button" asp-action="DeleteFinal" asp-controller="Luminaria" asp-route-id="@Model.Id" class="btn btn-primary">Eliminar</a></button>
-                        </div>
+                        <
 
 
-                </div>
+                </div>*@
 
                 
-            </div>
+            @*</div>*@
 
         </main>
 
@@ -120,111 +118,24 @@
                     <span class="material-icons-sharp active">light_mode</span>
                     <span class="material-icons-sharp">dark_mode</span>
                 </div>
-                <div class="profile">
-                    <div class="info">
-                        <p>Olá, <b>Diogo</b></p>
-                        <small class="text-muted">Admin</small>
-                    </div>
-                    <div class="profile-photo">
-                        <img src="/images/foto.jpeg" alt="" />
-                    </div>
-                </div>
             </div>
 
-            <div class="estatisticas">
-                <div class="header">
-                    <h1>Estatisticas</h1>
-                    <a href="#">More<span class="material-icons-sharp">chevron_right</span></a>
-                </div>
-                <div class="estatistica">
-                    <span class="material-icons-sharp"> lightbulb </span>
-                    <h4>Data de instalação</h4>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                </div>
-                <div class="estatistica">
-                    <span class="material-icons-sharp"> lightbulb </span>
-                    <h4>Última revisão</h4>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                </div>
-            </div>
+            
 
-            <div class="estatisticas">
-                <div class="header">
-                    <h1>Estatisticas</h1>
-                    <a href="#">More<span class="material-icons-sharp">chevron_right</span></a>
-                </div>
-                <div class="estatistica">
-                    <span class="material-icons-sharp"> lightbulb </span>
-                    <h4>Data de instalação</h4>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                </div>
-                <div class="estatistica">
-                    <span class="material-icons-sharp"> lightbulb </span>
-                    <h4>Última revisão</h4>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </div>
 
     <script src="./index.js"></script>
     <script>
-        // Initialize the map
         var map = L.map('map').setView([0, 0], 2);
 
-        // Create the tile layer
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // Define a variable for the marker
         var marker;
 
-        // Function to handle the map click event
         function onMapClick(e) {
             if (marker) {
                 map.removeLayer(marker);
@@ -233,9 +144,26 @@
             marker = L.marker(e.latlng).addTo(map);
             document.getElementById("input1").value = e.latlng.lat;
             document.getElementById("input2").value = e.latlng.lng;
+
+            // Reverse geocoding using OpenStreetMap (Nominatim)
+            var url = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + e.latlng.lat + '&lon=' + e.latlng.lng;
+
+            fetch(url)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    var city = data.address.city || data.address.town || data.address.village;
+                    var country = data.address.country;
+
+                    document.getElementById("inputCity").value = city;
+                    document.getElementById("inputCountry").value = country;
+                })
+                .catch(function (error) {
+                    console.log('Error:', error);
+                });
         }
 
-        // Add the map click event listener
         map.on('click', onMapClick);
     </script>
 

@@ -1,0 +1,66 @@
+﻿@model User
+
+<div class="top">
+    <div class="logo">
+       @* <img src="/img/logo.png" alt="" />*@
+        <h2>LUX<span class="color-primary">IFER</span></h2>
+    </div>
+    <div class="close" id="close-btn">
+        <span class="material-icons-sharp"> close </span>
+    </div>
+</div>
+<div class="sidebar">
+    
+    <a asp-area="" asp-controller="Home" asp-action="Index">
+        <span class="material-icons-sharp"> dashboard </span>
+        <h3>Dashboard</h3>
+    </a>
+
+    @if (Model.Perfil == Luxifer.Enums.PerfilEnum.Admin)
+    {
+        <a asp-area="" asp-controller="User" asp-action="Index">
+            <span class="material-icons-sharp"> groups </span>
+            <h3>Clientes</h3>
+        </a>
+    }
+    <a asp-area="" asp-controller="Luminaria" asp-action="Index">
+        <span class="material-icons-sharp"> lightbulb </span>
+        <h3>Luminárias</h3>
+    </a>
+    <a asp-area="" asp-controller="Grupos" asp-action="Index">
+        <span class="material-icons-sharp">
+            
+                workspaces          
+        </span>
+        <h3>Grupos</h3>
+    </a>
+    <a asp-area="" asp-controller="HelpCenter" asp-action="Index">
+        <span class="material-icons-sharp"> help </span>
+        <h3>Help Center</h3>
+    </a>
+    <a asp-area="" asp-controller="Settings" asp-action="Index">
+        <span class="material-icons-sharp"> settings </span>
+        <h3>Settings</h3>
+    </a>
+    <a asp-area="" asp-controller="Login" asp-action="Sair">
+        <span class="material-icons-sharp"> logout </span>
+        <h3>Logout</h3>
+    </a>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var links = $(".sidebar a");
+        var currentUrl = window.location.href;
+
+        links.each(function () {
+            var link = $(this);
+            var linkUrl = link.attr("href");
+
+            if (currentUrl.includes(linkUrl)) {
+                link.addClass("active");
+            }
+        });
+    });
+</script>

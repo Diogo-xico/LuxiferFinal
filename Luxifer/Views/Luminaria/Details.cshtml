@@ -1,0 +1,232 @@
+﻿@model Luxifer.Models.Luminaria
+
+@{
+    ViewData["Title"] = "Details";
+}
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<body>
+    <div class="container">
+        
+        <main>
+            <div class="luminaria">
+                <a asp-area="" asp-controller="User" asp-action="Index">
+                    <span class="material-icons-sharp">
+                        <span class="material-symbols-sharp">
+                            arrow_back
+                        </span>
+                    </span>
+                </a>
+                <div class="luminaria-info">
+
+                    <div class="luminaria-esquerda">
+                        <div class="profile-photo1">
+                            <img src="/img/bulb.png" alt="" />
+                        </div>
+                    </div>
+                    <div class="luminaria-direita">
+                        <div class="luminaria-modelo">
+
+                            <h1>@Html.DisplayFor(model => model.Modelo)</h1>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+
+                <div class="chartBox">
+                    <canvas id="myChart"></canvas>
+                </div>
+
+                <script>
+                    const x_vals = [
+                        0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 10.5, 11.5, 12.5,
+                        13.5, 14.5, 15.5, 16.5, 17.5, 18.5, 19.5, 20.5, 21.5, 22.5, 23.5,
+                    ];
+                    const y_vals = [
+                        10, 10, 10, 10, 40, 40, 40, 47, 0, 0, 0, 0, 16, 32, 42, 30, 17, 11,
+                        5, 8, 24, 16, 32, 42,
+                    ];
+                    const data = x_vals.map((k, i) => ({ x: k, y: y_vals[i] }));
+
+                    const backgroundColor1 = Array(x_vals.length).fill(
+                        "rgba(255, 99, 132, 0.2)"
+                    );
+                    const borderColor1 = Array(x_vals.length).fill(
+                        "rgba(255, 99, 132, 1)"
+                    );
+
+                    const ctx = document.getElementById("myChart").getContext("2d");
+                    const myChart = new Chart(ctx, {
+                        type: "bar",
+                        data: {
+                            datasets: [
+                                {
+                                    label: "Intensidade Luminária",
+                                    data: data,
+                                    backgroundColor: backgroundColor1,
+                                    borderColor: borderColor1,
+                                    borderWidth: 1,
+                                    barPercentage: 1,
+                                    categoryPercentage: 1,
+                                    borderRadius: 5,
+                                },
+                            ],
+                        },
+                        options: {
+                            scales: {
+                                x: {
+                                    type: "linear",
+                                    offset: false,
+                                    grid: {
+                                        offset: false,
+                                    },
+                                    ticks: {
+                                        stepSize: 1,
+                                    },
+                                    title: {
+                                        display: true,
+                                        text: "Horas",
+                                        font: {
+                                            size: 14,
+                                        },
+                                    },
+                                },
+                                y: {
+                                    // beginAtZero: true
+                                    title: {
+                                        display: true,
+                                        text: "Intensidade",
+                                        font: {
+                                            size: 14,
+                                        },
+                                    },
+                                },
+                            },
+                            plugins: {
+                                legend: {
+                                    display: false,
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        title: (items) => {
+                                            if (!items.length) {
+                                                return "";
+                                            }
+                                            const item = items[0];
+                                            const x = item.parsed.x;
+                                            const min = x - 0.5;
+                                            const max = x + 0.5;
+                                            return `Hours: ${min} - ${max}`;
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    });
+                </script>
+
+            </div>
+
+
+
+
+        </main>
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+                <div class="theme-toggler">
+                    <span class="material-icons-sharp active">light_mode</span>
+                    <span class="material-icons-sharp">dark_mode</span>
+                </div>
+
+            </div>
+
+            <div class="estatisticas">
+                <div class="header">
+                    <h1>Estatisticas</h1>
+
+                </div>
+                <div class="estatistica">
+                    <span class="material-icons-sharp">
+                        <span class="material-symbols-sharp">
+                            device_thermostat
+                        </span>
+                    </span>
+                    <h3>Temperatura</h3>
+                    <div class="date-time">
+                        <p>40ºC</p>
+                    </div>
+                </div>
+                <div class="estatistica">
+                    <span class="material-icons-sharp">
+                        <span class="material-symbols-sharp">
+                            schedule
+                        </span>
+                    </span>
+                    <h3>Sincronismo</h3>
+                    <div class="date-time">
+                        <p>1 hora</p>
+                    </div>
+                </div>
+                <div class="estatistica">
+                    <span class="material-icons-sharp"> calendar_month </span>
+                    <h3>Data de instalação</h3>
+
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                    </div>
+                </div>
+                <div class="estatistica">
+                    <span class="material-icons-sharp"> settings </span>
+                    <h3>Última revisão</h3>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="estatisticas">
+                <div class="header">
+                    <h1>Localização</h1>
+
+                </div>
+                <div class="estatistica">
+                    <span class="material-icons-sharp"> flag </span>
+                    <h3>@Html.DisplayNameFor(model => model.Pais)</h3>
+                    <div class="date-time">
+                        <p>@Html.DisplayFor(model => model.Pais)</p>
+                    </div>
+                </div>
+                <div class="estatistica">
+                    <span class="material-icons-sharp">location_city</span>
+                    <h3>@Html.DisplayNameFor(model => model.Cidade)</h3>
+                    <div class="date-time">
+                        <p>@Html.DisplayFor(model => model.Cidade)</p>
+                    </div>
+                </div>
+                <div class="estatistica">
+                    <span class="material-icons-sharp">location_on</span>
+                    <h3>@Html.DisplayNameFor(model => model.Latitude)</h3>
+                    <div class="date-time">
+                        <p>@Html.DisplayFor(model => model.Latitude)</p>
+                    </div>
+                </div>
+                <div class="estatistica">
+                    <span class="material-icons-sharp">
+                        <span class="material-symbols-sharp">location_on</span>
+                    </span>
+                    <h3>@Html.DisplayNameFor(model => model.Longitude)</h3>
+                    <div class="date-time">
+                        <p>@Html.DisplayFor(model => model.Longitude)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>

@@ -1,0 +1,188 @@
+﻿@model List<User>
+@{
+    ViewData["Title"] = "Clientes";
+}
+<head>
+    <link href="https://cdn.datatables.net/v/dt/dt-1.13.4/datatables.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        #map {
+            height: 350px;
+        }
+
+        .header-center {
+            text-align: center !important;
+        }
+
+        table.dataTable thead tr {
+            background-color: #e03840;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="container">
+        
+        <main>
+
+            @if (TempData["MensagemAdicionarSucesso"] != null)
+            {
+                <figure class="notification">
+                    <div class="notification__body">
+                        <span class="material-icons-sharp"> person_add </span>
+                        @TempData["MensagemAdicionarSucesso"]
+                    </div>
+                    <div class="notification__progress"></div>
+                </figure>
+            }
+
+            @if (TempData["MensagemEliminarSucesso"] != null)
+            {
+                <figure class="notification">
+                    <div class="notification__body">
+                        <span class="material-icons-sharp"> person_remove </span>
+                        @TempData["MensagemEliminarSucesso"]
+                    </div>
+                    <div class="notification__progress"></div>
+                </figure>
+            }
+           
+            <div class="headerClientes">
+                <h1>Lista de Clientes</h1>
+                <button class="modern-button"><span class="material-icons-sharp"> person_add </span><a asp-area="" asp-controller="User" asp-action="Create"><h2>Adicionar Cliente</h2></a></button>
+            </div>
+
+            <div class="grupos-luminarias">
+                <table id="table-users">
+                    <thead>
+                        <tr>
+                            <th class="center-text">ID</th>
+                            <th>Nome</th>
+                            <th>Login</th>
+                            <th>Email</th>
+                            <th>Perfil</th>
+                            <th>Data de criação</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                            @if(Model != null && Model.Any())
+                            {
+                            foreach (User user in Model)
+                                {
+                                    <tr>
+                                        <td>@user.Id</td>
+                                        <td>@user.Nome</td>
+                                        <td>@user.Login</td>
+                                        <td>@user.Email</td>
+                                        <td>@(user.Perfil == Luxifer.Enums.PerfilEnum.Admin ? "Administrador" : "Padrão")</td>
+
+                                        <td>@user.DataCriacao</td>
+                                        <td class="primary">
+                                            <a asp-area="" asp-controller="User" asp-action="Details" asp-route-id="@user.Id">Detalhes</a>
+                                        </td>
+                                        <td>
+                                            <a asp-area="" asp-controller="User" asp-action="Delete" asp-route-id="@user.Id">
+                                                <span class="material-icons-sharp"> delete </span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                    </tbody>
+                </table>
+            </div>
+
+    
+        </main>
+        <div class="right">
+            <div class="top">
+                <button id="menu-btn">
+                    <span class="material-icons-sharp">menu</span>
+                </button>
+                <div class="theme-toggler">
+                    <span class="material-icons-sharp active">light_mode</span>
+                    <span class="material-icons-sharp">dark_mode</span>
+                </div>             
+            </div>
+
+            <div class="estatisticas">
+                <div class="header">
+                    <h1>Estatisticas</h1>
+                    @*<a href="#">More<span class="material-icons-sharp">chevron_right</span></a>*@
+                </div>
+                <div class="estatistica">
+                    <span class="material-icons-sharp"> person </span>
+                    <h3>Número de Clientes</h3>
+                    <div class="date-time">
+                        <p>10</p>
+                        
+                    </div>
+                 
+                </div>
+                <div class="estatistica">
+                    <span class="material-icons-sharp">
+                        <span class="material-symbols-sharp">
+                            manage_accounts
+                        </span>
+                    </span>
+                    <h3>Número de Admins</h3>
+                    <div class="date-time">
+                        <p>2</p>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+           
+        </div>
+    </div>
+
+   
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table-luminarias').DataTable({
+                "ordering": true,
+                "paging": true,
+                "searching": true,
+                "oLanguage": {
+                    "sEmptyTable": "Nenhum registo encontrado na tabela",
+                    "sInfo": "Mostrar _START_ até _END_ de _TOTAL_ Luminárias",
+                    "sInfoEmpty": "Mostrar 0 até 0 de 0 Luminárias",
+                    "sInfoFiltered": "(Filtrar de _MAX_ total Luminárias)",
+                    "sInfoPostFix": "",
+                    "sInfoThousands": ".",
+                    "sLengthMenu": "Mostrar _MENU_ Luminárias por página",
+                    "sLoadingRecords": "A carregar...",
+                    "sProcessing": "A processar...",
+                    "sZeroRecords": "Nenhuma Luminária encontrado",
+                    "sSearch": "Pesquisar",
+                    "oPaginate": {
+                        "sNext": "Próximo",
+                        "sPrevious": "Anterior",
+                        "sFirst": "Primeiro",
+                        "sLast": "Último"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": Ordenar colunas de forma ascendente",
+                        "sSortDescending": ": Ordenar colunas de forma descendente"
+                    }
+                },
+                "lengthMenu": [[5, 10, 15, -1], [5, 10, 15, "Todos"]],
+                "columnDefs": [
+                    { "className": "header-center", "targets": "_all" }
+                ]
+            });
+        });
+    </script>
+
+</body>
+

@@ -1,5 +1,8 @@
-﻿@{
-    ViewData["Title"] = "Dashboard";
+﻿@model Luxifer.Models.teste;
+
+
+@{
+    ViewData["Title"] = "Dashboard"; 
 }
 
 <head>
@@ -18,51 +21,11 @@
 
 <body>
     <div class="container">
-        <aside id="sidebar">
-            <div class="top">
-                <div class="logo">
-                    <img src="./images/logo.png" alt="" />
-                    <h2>LUX<span class="color-primary">IFER</span></h2>
-                </div>
-                <div class="close" id="close-btn">
-                    <span class="material-icons-sharp"> close </span>
-                </div>
-            </div>
-            <div class="sidebar">
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="active">
-                    <span class="material-icons-sharp"> dashboard </span>
-                    <h3>Dashboard</h3>
-                </a>
-                <a asp-area="" asp-controller="Clientes" asp-action="Index">
-                    <span class="material-icons-sharp"> groups </span>
-                    <h3>Clientes</h3>
-                </a>
-                <a asp-area="" asp-controller="Luminaria" asp-action="Index">
-                    <span class="material-icons-sharp"> lightbulb </span>
-                    <h3>Luminárias</h3>
-                </a>
-                <a asp-area="" asp-controller="Grupos" asp-action="Index">
-                    <span class="material-icons-sharp"> lightbulb </span>
-                    <h3>Grupos</h3>
-                </a>
-                <a asp-area="" asp-controller="Home" asp-action="HelpCenter">
-                    <span class="material-icons-sharp"> help </span>
-                    <h3>Help Center</h3>
-                </a>
-                <a asp-area="" asp-controller="Settings" asp-action="Index">
-                    <span class="material-icons-sharp"> settings </span>
-                    <h3>Settings</h3>
-                </a>
-                <a asp-area="" asp-controller="Home" asp-action="Index">
-                    <span class="material-icons-sharp"> logout </span>
-                    <h3>Logout</h3>
-                </a>
-            </div>
-        </aside>
+       
 
         <main>
             <div class="headerClientes">
-                <h1>Overview</h1>
+                <h1>Olá, @Model.User.Nome! </h1><h2>@Model.User.Perfil</h2>
             </div>
 
 
@@ -128,7 +91,7 @@
             </div>
             <div id="map"></div>
 
-            <canvas id="chart"></canvas>
+            
             <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
 
             <div class="chartBox">
@@ -223,7 +186,6 @@
                 });
             </script>
         </main>
-
         <div class="right">
             <div class="top">
                 <button id="menu-btn">
@@ -233,96 +195,83 @@
                     <span class="material-icons-sharp active">light_mode</span>
                     <span class="material-icons-sharp">dark_mode</span>
                 </div>
-                <div class="profile">
-                    <div class="info">
-                        <p>Olá, <b>Diogo</b></p>
-                        <small class="text-muted">Admin</small>
-                    </div>
-                    <div class="profile-photo">
-                        <img src="./images/foto.jpeg" alt="" />
-                    </div>
-                </div>
             </div>
 
             <div class="estatisticas">
                 <div class="header">
-                    <h1>Estatisticas</h1>
-                    <a href="#">More<span class="material-icons-sharp">chevron_right</span></a>
+                    <h1>Luminárias</h1>
+                    <a asp-controller="Luminaria" asp-action="Index">Mais<span class="material-icons-sharp">chevron_right</span></a>
                 </div>
-                <div class="estatistica">
-                    <span class="material-icons-sharp"> lightbulb </span>
-                    <h4>Data de instalação</h4>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                </div>
-                <div class="estatistica">
-                    <span class="material-icons-sharp"> lightbulb </span>
-                    <h4>Última revisão</h4>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                </div>
+
+
+                @if (Model != null && Model.Luminarias.Any())
+                {
+
+                    foreach (Luminaria luminaria in Model.Luminarias)
+                    {
+                        <div class="estatistica">
+
+                            <span class="material-icons-sharp"> lightbulb </span>
+                            <h4>@luminaria.Modelo</h4>
+                            <h4></h4>
+                            <div class="date-time">
+                                <h4>Cidade</h4>
+                                <small class="text-muted">@luminaria.Cidade</small>
+                            </div>
+                            <div class="date-time">
+                                <h4>País</h4>
+                                <small class="text-muted">@luminaria.Pais</small>
+                            </div>
+                            <div class="date-time">
+                                <p>Estado</p>
+                                <small class="text-muted">Ativa</small>
+                            </div>
+                        </div>
+
+                    }
+
+                }
+
             </div>
 
-            <div class="estatisticas">
-                <div class="header">
-                    <h1>Estatisticas</h1>
-                    <a href="#">More<span class="material-icons-sharp">chevron_right</span></a>
-                </div>
-                <div class="estatistica">
-                    <span class="material-icons-sharp"> lightbulb </span>
-                    <h4>Data de instalação</h4>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                </div>
-                <div class="estatistica">
-                    <span class="material-icons-sharp"> lightbulb </span>
-                    <h4>Última revisão</h4>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                </div>
-            </div>
+         
         </div>
+        
     </div>
+
+    <script>
+        
+    </script>
+
+ @*   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>*@
+
+    
+
+    <script>
+        var luminarias = @Html.Raw(Json.Serialize(Model.Luminarias));
+ 
+        var map = L.map('map');
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+        }).addTo(map);
+
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var latLng = L.latLng(position.coords.latitude, position.coords.longitude);
+                map.setView(latLng, 20);
+
+                luminarias.forEach(function (luminaria) {
+                    var markerLatLng = L.latLng(luminaria.latitude, luminaria.longitude);
+                    L.marker(markerLatLng).addTo(map);
+                });
+            }, function (error) {
+                console.log('Erro ao obter a localização do usuário:', error.message);
+            });
+        } else {
+            console.log('Navegador não suporta a Geolocalização.');
+        }
+    </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js"
             integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ=="

@@ -13,53 +13,19 @@
 
 <body>
     <div class="container">
-        <aside id="sidebar">
-            <div class="top">
-                <div class="logo">
-                    <img src="/images/logo.png" alt="" />
-                    <h2>LUX<span class="color-primary">IFER</span></h2>
-                </div>
-                <div class="close" id="close-btn">
-                    <span class="material-icons-sharp"> close </span>
-                </div>
-            </div>
-            <div class="sidebar">
-                <a asp-area="" asp-controller="Home" asp-action="Index">
-                    <span class="material-icons-sharp"> dashboard </span>
-                    <h3>Dashboard</h3>
-                </a>
-                <a asp-area="" asp-controller="Clientes" asp-action="Index" class="active">
-                    <span class="material-icons-sharp"> groups </span>
-                    <h3>Clientes</h3>
-                </a>
-                <a asp-area="" asp-controller="Luminarias" asp-action="Index">
-                    <span class="material-icons-sharp"> lightbulb </span>
-                    <h3>Luminárias</h3>
-                </a>
-                <a asp-area="" asp-controller="Grupos" asp-action="Index">
-                    <span class="material-icons-sharp"> lightbulb </span>
-                    <h3>Grupos</h3>
-                </a>
-                <a asp-area="" asp-controller="Home" asp-action="HelpCenter">
-                    <span class="material-icons-sharp"> help </span>
-                    <h3>Help Center</h3>
-                </a>
-                <a asp-area="" asp-controller="Settings" asp-action="Index">
-                    <span class="material-icons-sharp"> settings </span>
-                    <h3>Settings</h3>
-                </a>
-                <a asp-area="" asp-controller="Home" asp-action="Index">
-                    <span class="material-icons-sharp"> logout </span>
-                    <h3>Logout</h3>
-                </a>
-            </div>
-        </aside>
-
-
+       
         <main>
 
-            <hr />
+            <a asp-area="" asp-controller="User" asp-action="Index">
+                <span class="header-titulo material-icons-sharp">
+                    <span class="material-symbols-sharp">
+                        arrow_back
+                    </span>
+                </span>
+            </a>
 
+            <hr />
+            
             <div id="map"></div>
 
             <div class="formulario">
@@ -120,16 +86,7 @@
                 <div class="theme-toggler">
                     <span class="material-icons-sharp active">light_mode</span>
                     <span class="material-icons-sharp">dark_mode</span>
-                </div>
-                <div class="profile">
-                    <div class="info">
-                        <p>Olá, <b>Diogo</b></p>
-                        <small class="text-muted">Admin</small>
-                    </div>
-                    <div class="profile-photo">
-                        <img src="/images/foto.jpeg" alt="" />
-                    </div>
-                </div>
+                </div>              
             </div>
 
             <div class="estatisticas">

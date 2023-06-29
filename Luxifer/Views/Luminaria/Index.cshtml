@@ -23,58 +23,14 @@
 
 <body>
     <div class="container">
-        <aside id="sidebar">
-            <div class="top">
-                <div class="logo">
-                    <img src="/images/logo.png" alt="" />
-                    <h2>LUX<span class="color-primary">IFER</span></h2>
-                </div>
-                <div class="close" id="close-btn">
-                    <span class="material-icons-sharp"> close </span>
-                </div>
-            </div>
-            <div class="sidebar">
-                <a asp-area="" asp-controller="Home" asp-action="Index">
-                    <span class="material-icons-sharp"> dashboard </span>
-                    <h3>Dashboard</h3>
-                </a>
-                <a asp-area="" asp-controller="Clientes" asp-action="Index">
-                    <span class="material-icons-sharp"> groups </span>
-                    <h3>Clientes</h3>
-                </a>
-                <a asp-area="" asp-controller="Luminarias" asp-action="Index" class="active">
-                    <span class="material-icons-sharp"> lightbulb </span>
-                    <h3>Luminárias</h3>
-                </a>
-                <a asp-area="" asp-controller="Grupos" asp-action="Index">
-                    <span class="material-icons-sharp"> lightbulb </span>
-                    <h3>Grupos</h3>
-                </a>
-                <a asp-area="" asp-controller="Home" asp-action="HelpCenter">
-                    <span class="material-icons-sharp"> help </span>
-                    <h3>Help Center</h3>
-                </a>
-                <a asp-area="" asp-controller="Settings" asp-action="Index">
-                    <span class="material-icons-sharp"> settings </span>
-                    <h3>Settings</h3>
-                </a>
-                <a asp-area="" asp-controller="Home" asp-action="Index">
-                    <span class="material-icons-sharp"> logout </span>
-                    <h3>Logout</h3>
-                </a>
-            </div>
-        </aside>
-
-
+       
         <main>
 
             <div class="headerClientes">
                 <h1>Luminarias Associadas</h1>
-                <button class="modern-button"><span class="material-icons-sharp"> person_add </span><a asp-area="" asp-controller="Luminaria" asp-action="Create"><h2>Adicionar Luminaria</h2></a></button>
             </div>
 
             <div id="map"></div>
-
 
             <div class="grupos-luminarias">
                 <table id="table-luminarias">
@@ -92,58 +48,32 @@
                     </thead>
 
                     <tbody>
-                            @if(Model != null && Model.Any())
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (Luminaria luminaria in Model)
                             {
-                                foreach (Luminaria luminaria in Model)
-                                {
-                                    <tr>
-                                        <td>@luminaria.Id</td>
-                                        <td>@luminaria.Modelo</td>
-                                        <td>@luminaria.Pais</td>
-                                        <td>@luminaria.Cidade</td>
-                                        <td>@luminaria.Latitude</td>
-                                        <td>@luminaria.Longitude</td>
-                                        <td class="primary"><a asp-area="" asp-controller="Luminaria" asp-action="Edit" asp-route-id="@luminaria.Id">Editar</a></td>
-                                    <td><a asp-area="" asp-controller="Luminaria" asp-action="Delete" asp-route-id="@luminaria.Id"><span class="material-icons-sharp"> delete </span></a></td>
-                                    </tr>
-                                }
+                                <tr>
+                                    <td>@luminaria.Id</td>
+                                    <td>@luminaria.Modelo</td>
+                                    <td>@luminaria.Pais</td>
+                                    <td>@luminaria.Cidade</td>
+                                    <td>@luminaria.Latitude</td>
+                                    <td>@luminaria.Longitude</td>
+                                    <td class="primary">
+                                        <a asp-controller="Luminaria" asp-action="Details" asp-route-id="@luminaria.Id">Detalhes</a>
+                                    </td>
+                                    <td>
+                                        <a asp-controller="Luminaria" asp-action="Delete" asp-route-id="@luminaria.Id">
+                                            <span class="material-icons-sharp"> delete </span>
+                                        </a>
+                                    </td>
+                                </tr>
                             }
+                        }
                     </tbody>
                 </table>
             </div>
 
-            <div class="luminaria-specs">
-                <div class="header">
-                    <span class="material-icons-sharp">lightbulb</span>
-
-                    <h2>LAMP665533</h2>
-                </div>
-                <div class="specs-luminaria">
-                    <h1>Geral</h1>
-                    <div class="specs">
-                        <h2>Nome do Objeto:</h2>
-                        <h2>LAMP665533</h2>
-                    </div>
-                    <div class="specs">
-                        <h2>Modelo do Objeto:</h2>
-                        <h2>Luxifer L1</h2>
-                    </div>
-                    <div class="specs">
-                        <h2>Localização:</h2>
-                        <h2>41º24'12.2"N 2º10´26.5"E</h2>
-                    </div>
-                    <div class="specs">
-                        <h2>Cidade:</h2>
-                        <h2>Coimbra</h2>
-                    </div>
-                    <div class="specs">
-                        <h2>País:</h2>
-                        <h2>Portugal</h2>
-                    </div>
-
-
-                </div>
-            </div>
         </main>
         <div class="right">
             <div class="top">
@@ -154,91 +84,69 @@
                     <span class="material-icons-sharp active">light_mode</span>
                     <span class="material-icons-sharp">dark_mode</span>
                 </div>
-                <div class="profile">
-                    <div class="info">
-                        <p>Olá, <b>Diogo</b></p>
-                        <small class="text-muted">Admin</small>
+            </div>
+
+            <div class="estatisticas">
+                <div class="header">
+                    <h1>Luminária</h1>
+
+                </div>
+                <div class="estatistica">
+                    <span class="material-icons-sharp"> calendar_month </span>
+                    <h3>Modelo</h3>
+
+                    <div class="date-time">
+                        <p id="modeloLuminaria">LAMP</p>
                     </div>
-                    <div class="profile-photo">
-                        <img src="/images/foto.jpeg" alt="" />
+                </div>
+                <div class="estatistica">
+                    <span class="material-icons-sharp"> calendar_month </span>
+                    <h3>Data de instalação</h3>
+
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
+                    </div>
+                </div>
+                <div class="estatistica">
+                    <span class="material-icons-sharp"> settings </span>
+                    <h3>Última revisão</h3>
+                    <div class="date-time">
+                        <p>7 Nov, 2021</p>
                     </div>
                 </div>
             </div>
 
             <div class="estatisticas">
                 <div class="header">
-                    <h1>Estatisticas</h1>
-                    <a href="#">More<span class="material-icons-sharp">chevron_right</span></a>
-                </div>
-                <div class="estatistica">
-                    <span class="material-icons-sharp"> lightbulb </span>
-                    <h4>Data de instalação</h4>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                </div>
-                <div class="estatistica">
-                    <span class="material-icons-sharp"> lightbulb </span>
-                    <h4>Última revisão</h4>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                </div>
-            </div>
+                    <h1>Localização</h1>
 
-            <div class="estatisticas">
-                <div class="header">
-                    <h1>Estatisticas</h1>
-                    <a href="#">More<span class="material-icons-sharp">chevron_right</span></a>
                 </div>
                 <div class="estatistica">
-                    <span class="material-icons-sharp"> lightbulb </span>
-                    <h4>Data de instalação</h4>
+                    <span class="material-icons-sharp"> flag </span>
+                    <h3>País</h3>
                     <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
-                    </div>
-                    <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
+                        <p id="paisLuminaria"></p>
                     </div>
                 </div>
                 <div class="estatistica">
-                    <span class="material-icons-sharp"> lightbulb </span>
-                    <h4>Última revisão</h4>
+                    <span class="material-icons-sharp">location_city</span>
+                    <h3>Cidade</h3>
                     <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
+                        <p id="cidadeLuminaria"></p>
                     </div>
+                </div>
+                <div class="estatistica">
+                    <span class="material-icons-sharp">location_on</span>
+                    <h3>Latitude</h3>
                     <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
+                        <p id="latitudeLuminaria"></p>
                     </div>
+                </div>
+                <div class="estatistica">
+                    <span class="material-icons-sharp">location_on</span>
+                    <h3>Longitude</h3>
                     <div class="date-time">
-                        <p>7 Nov, 2021</p>
-                        <small class="text-muted">9:14pm</small>
+                        <p id="longitudeLuminaria"></p>
                     </div>
                 </div>
             </div>
@@ -286,6 +194,43 @@
             });
         });
     </script>
+  
+    @*<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>*@
+    
+    <script>
+        var luminarias = @Html.Raw(Json.Serialize(Model));
+        
+        var map = L.map('map');
 
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+        }).addTo(map);
+
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var latLng = L.latLng(position.coords.latitude, position.coords.longitude);
+                map.setView(latLng, 25);
+
+                luminarias.forEach(function (luminaria) {
+                    var markerLatLng = L.latLng(luminaria.latitude, luminaria.longitude);
+                    var marker = L.marker(markerLatLng).addTo(map);
+
+                    marker.on('click', function () {
+
+                        $('#nomeLuminaria').text(luminaria.nome);
+                        $('#modeloLuminaria').text(luminaria.modelo);
+                        $('#latitudeLuminaria').text(luminaria.latitude);
+                        $('#longitudeLuminaria').text(luminaria.longitude);
+                        $('#cidadeLuminaria').text(luminaria.cidade);
+                        $('#paisLuminaria').text(luminaria.pais);
+                    });
+                });
+            }, function (error) {
+                console.log('Erro ao obter a localização do usuário:', error.message);
+            });
+        } else {
+            console.log('Navegador não suporta a Geolocalização.');
+        }
+    </script>
 </body>
 
