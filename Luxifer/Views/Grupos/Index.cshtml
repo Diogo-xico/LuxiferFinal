@@ -25,7 +25,17 @@
 <body>
     <div class="container">
 
+        
         <main>
+            @if (TempData["MensagemAdicionarSucesso"] != null)
+            {
+                <figure class="notification">
+                    <div class="notification__body">
+                        @TempData["MensagemAdicionarSucesso"]
+                    </div>
+                    <div class="notification__progress"></div>
+                </figure>
+            }
 
             <div class="headerClientes">
                 <h1>Os seus Grupos</h1>
@@ -77,48 +87,7 @@
                     </tbody>
                 </table>
             </div>
-
-            @*<div class="headerClientes">
-            <h1>As suas Luminárias</h1>
-
-            </div>
-
-            <div class="grupos-luminarias">
-            <table id="table-luminarias">
-            <thead>
-            <tr>
-            <th class="center-text">ID</th>
-            <th>Modelo</th>
-            <th>Pais</th>
-            <th>Cidade</th>
-            <th>Latitude</th>
-            <th>Longitude</th>
-            <th></th>
-            <th></th>
-            </tr>
-            </thead>
-
-            <tbody>
-            @if (Model != null && Model.Luminarias.Any())
-            {
-            foreach (var item in Model.Luminarias)
-            {
-            <tr>
-            <td>@item.Id</td>
-            <td>@item.Modelo</td>
-            <td>@item.Pais</td>
-            <td>@item.Cidade</td>
-            <td>@item.Latitude</td>
-            <td>@item.Longitude</td>
-            <td class="primary">
-            <a asp-controller="Luminaria" asp-action="Edit" asp-route-id="@item.Id">Informações</a>
-            </td>
-            </tr>
-            }
-            }
-            </tbody>
-            </table>
-            </div>*@
+        
 
         </main>
 
@@ -133,46 +102,8 @@
         </div>
         
         </div>
-
-       @* <div class="estatisticas">
-        <div class="header">
-        <h1>Estatisticas</h1>
-        <a href="#">More<span class="material-icons-sharp">chevron_right</span></a>
-        </div>
-        <div class="estatistica">
-        <span class="material-icons-sharp"> lightbulb </span>
-        <h4>Data de instalação</h4>
-        <div class="date-time">
-        <p>7 Nov, 2021</p>
-        <small class="text-muted">9:14pm</small>
-        </div>
-        <div class="date-time">
-        <p>7 Nov, 2021</p>
-        <small class="text-muted">9:14pm</small>
-        </div>
-        <div class="date-time">
-        <p>7 Nov, 2021</p>
-        <small class="text-muted">9:14pm</small>
-        </div>
-        </div>
-        <div class="estatistica">
-        <span class="material-icons-sharp"> lightbulb </span>
-        <h4>Última revisão</h4>
-        <div class="date-time">
-        <p>7 Nov, 2021</p>
-        <small class="text-muted">9:14pm</small>
-        </div>
-        <div class="date-time">
-        <p>7 Nov, 2021</p>
-        <small class="text-muted">9:14pm</small>
-        </div>
-        <div class="date-time">
-        <p>7 Nov, 2021</p>
-        <small class="text-muted">9:14pm</small>
-        </div>
-        </div>
-        </div>*@
   
+        </div>
     </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -187,15 +118,15 @@
                 "searching": true,
                 "oLanguage": {
                     "sEmptyTable": "Nenhum registo encontrado na tabela",
-                    "sInfo": "Mostrar START até END de TOTAL Luminárias",
-                    "sInfoEmpty": "Mostrar 0 até 0 de 0 Luminárias",
-                    "sInfoFiltered": "(Filtrar de MAX total Luminárias)",
+                    "sInfo": "Mostrar _START_ até _END_ de _TOTAL_ Grupos",
+                    "sInfoEmpty": "Mostrar 0 até 0 de 0 Grupos",
+                    "sInfoFiltered": "(Filtrar de _MAX_ total Grupos)",
                     "sInfoPostFix": "",
                     "sInfoThousands": ".",
-                    "sLengthMenu": "Mostrar MENU Luminárias por página",
+                    "sLengthMenu": "Mostrar _MENU_ Grupos por página",
                     "sLoadingRecords": "A carregar...",
                     "sProcessing": "A processar...",
-                    "sZeroRecords": "Nenhuma Luminária encontrado",
+                    "sZeroRecords": "Nenhum Grupo encontrado",
                     "sSearch": "Pesquisar",
                     "oPaginate": {
                         "sNext": "Próximo",

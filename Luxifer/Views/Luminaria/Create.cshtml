@@ -203,7 +203,6 @@
             document.getElementById("input1").value = e.latlng.lat;
             document.getElementById("input2").value = e.latlng.lng;
 
-            // Reverse geocoding using OpenStreetMap (Nominatim)
             var url = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + e.latlng.lat + '&lon=' + e.latlng.lng;
 
             fetch(url)

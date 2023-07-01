@@ -16,7 +16,7 @@ namespace Luxifer.Controllers
         }
         public IActionResult Index()
         {
-            //Se user já estiver logado vai redirecionar para a DashBoard principal
+         
             if (_sessao.ProcurarSessaoUser() != null) return RedirectToAction("Index", "Home");
             return View();
         }
@@ -43,9 +43,9 @@ namespace Luxifer.Controllers
                             _sessao.CriarSessaoUser(user);
                             return RedirectToAction("Index", "Home");
                         }
-                        TempData["Erro"] = $"Dados Invalidos"; 
+                        TempData["Erro"] = $"Dados Inválidos";                      
                     }
-                    TempData["Erro"] = $"Dados Invalidos";
+                    TempData["Erro"] = $"Dados Inválidos";
                 }
 
                 return View("Index");

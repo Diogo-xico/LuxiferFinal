@@ -15,37 +15,39 @@
 <body>
     <div class="container">
         <main>
+
             <hr />
-            <div class="formulario">
-                <h1 class="form-title">Eliminar Grupo</h1>
+            <a asp-area="" asp-controller="Grupos" asp-action="Index">
+                <span class="material-icons-sharp">
+                    <span class="material-symbols-sharp">
+                        arrow_back
+                    </span>
+                </span>
+            </a>
+            <div class="luminaria-specs">
+                <div class="header">
+                    <span class="material-icons-sharp">lightbulb</span>
 
-                <div class="main-user-info">
-
-                    <div class="luminaria-specs">
-
-                        <div class="specs-luminaria">
-                            <h1>Geral</h1>
-                            <div class="specs">
-                                <h2>Id do Grupo:</h2>
-                                <h2>@Model.Id</h2>
-                            </div>
-                            <div class="specs">
-                                <h2>Nome do Grupo:</h2>
-                                <h2>@Model.Nome</h2>
-                            </div>
-                            <div class="specs">
-                                <h2>País:</h2>
-                                <h2>@Model.Cor</h2>
-                            </div>
-                        </div>
+                    <h2>ID: @Model.Id</h2>
+                </div>
+                <div class="specs-luminaria">
+                    <h1>Geral</h1>
+                    <div class="specs">
+                        <h2>Modelo do Objeto:</h2>
+                        <h2>@Model.Nome</h2>
                     </div>
-                    <div class="form-submit-btn">
-                        <button class="modern-button">
-                            <a role="button" asp-action="DeleteFinal" asp-controller="Grupos" asp-route-id="@Model.Id" class="btn btn-primary">Eliminar</a>
-                        </button>
+                    <div class="specs">
+                        <h2>Cor</h2>
+                        <h2>@Model.Cor</h2>
                     </div>
                 </div>
             </div>
+            <div class="form-submit-btn">
+                <button class="modern-button1">
+                    <a role="button" asp-action="DeleteFinal" asp-controller="Grupos" asp-route-id="@Model.Id" class="btn btn-primary"><h2>Eliminar</h2></a>
+                </button>
+            </div>   
+
         </main>
 
         <div class="right">
@@ -142,18 +144,18 @@
 
     <script src="./index.js"></script>
     <script>
-        // Initialize the map
+        
         var map = L.map('map').setView([0, 0], 2);
 
-        // Create the tile layer
+        
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // Define a variable for the marker
+        
         var marker;
 
-        // Function to handle the map click event
+       
         function onMapClick(e) {
             if (marker) {
                 map.removeLayer(marker);
@@ -164,7 +166,7 @@
             document.getElementById("input2").value = e.latlng.lng;
         }
 
-        // Add the map click event listener
+       
         map.on('click', onMapClick);
     </script>
 

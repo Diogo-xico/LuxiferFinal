@@ -66,28 +66,86 @@ namespace Luxifer.Controllers
 
         public IActionResult DeleteFinal(int id)
         {
-            _grupoRepo.Delete(id);
-            return RedirectToAction("Index");
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _grupoRepo.Delete(id);
+                    TempData["MensagemAdicionarSucesso"] = "Eliminado com sucesso";
+                    return RedirectToAction("Index");
+                }
+                return View(id);
+            }
+            catch (System.Exception)
+            {
+                TempData["MensagemEliminarSucesso"] = "Grupo não foi adicionado";
+                return RedirectToAction("Index");
+            }
         }
 
         [HttpPost]
         public IActionResult Create(Grupo grupo)
         {
-            User userLoged = _sessao.ProcurarSessaoUser();
-            grupo.UserId = userLoged.Id;
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    User userLoged = _sessao.ProcurarSessaoUser();
+                    grupo.UserId = userLoged.Id;
 
-            grupo = _grupoRepo.Create(grupo);
-            return RedirectToAction("Index");
+                    grupo = _grupoRepo.Create(grupo);
+                    TempData["MensagemAdicionarSucesso"] = "Adicionado com sucesso";
+                    return RedirectToAction("Index");
+
+                }
+                else
+                {
+                    User userLoged = _sessao.ProcurarSessaoUser();
+                    grupo.UserId = userLoged.Id;
+
+                    grupo = _grupoRepo.Create(grupo);
+                    TempData["MensagemAdicionarSucesso"] = "Adicionado com sucesso";
+                    return RedirectToAction("Index");
+                }              
+            }
+            catch (System.Exception)
+            {
+                TempData["MensagemEliminarSucesso"] = "Grupo não foi adicionado";
+                return RedirectToAction("Index");
+            }
         }
 
-        [HttpPost]
+         [HttpPost]
         public IActionResult Edit(Grupo grupo)
         {
-            User userLoged = _sessao.ProcurarSessaoUser();
-            grupo.UserId = userLoged.Id;
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    User userLoged = _sessao.ProcurarSessaoUser();
+                    grupo.UserId = userLoged.Id;
 
-            grupo = _grupoRepo.Edit(grupo);
-            return RedirectToAction("Index");
+                    grupo = _grupoRepo.Edit(grupo);
+                    TempData["MensagemAdicionarSucesso"] = "Editado com sucesso";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    User userLoged = _sessao.ProcurarSessaoUser();
+                    grupo.UserId = userLoged.Id;
+
+                    grupo = _grupoRepo.Edit(grupo);
+                    TempData["MensagemAdicionarSucesso"] = "Editado com sucesso";
+                    return RedirectToAction("Index");
+                }
+              
+             }
+            catch(System.Exception)
+            {
+                TempData["MensagemAdicionarSucesso"] = "Grupo não foi Editado";
+                return RedirectToAction("Index");
+            }
+
         }
     }
 }

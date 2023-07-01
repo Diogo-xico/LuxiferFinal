@@ -27,14 +27,17 @@
 
 </head>
 
-@if (TempData["MensagemErro"] != null)
-{
-    <div class="alert alert-danger" role="alert">
-        <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" aria-label="Close">X</button>
-        @TempData ["MensagemErro"]
-    </div>
-}
+
 <body>
+    @if (TempData["Erro"] != null)
+    {
+        <figure class="notification">
+            <div class="notification__body">
+                @TempData["Erro"]
+            </div>
+            <div class="notification__progress"></div>
+        </figure>
+    }
     <div class="container">
         <div class="form-box">
             <h1 id="title">Login</h1>
@@ -56,8 +59,7 @@
                     <div class="btn-field">
                         <button type="submit" id="signupBtn">Entrar</button>
 
-                    </div>
-                    @*<p>Esqueceu sua senha? <a href="#">Clica Aqui!</a></p>*@
+                    </div>              
                 </div>
                 
             </form>

@@ -12,7 +12,7 @@ namespace Luxifer.Repository
 
         public User ProcurarLogin(string email)
         {
-            return _applicationDbContext.Users.FirstOrDefault(X => X.Email.ToUpper() == email.ToUpper());
+            return _applicationDbContext.Users.FirstOrDefault(X => X.Email == email);
         }
         public User ListarPorId(int id)
         {

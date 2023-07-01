@@ -7,95 +7,81 @@
     <div class="container">
 
         <main>
-          
+       
             <div class="txte">
                 <div class="esquerda">
+
                     <h1>Como podemos ajudar?</h1>
-                    <form method="post">
+                    <form method="post" id="submit">
                         <div class="txt_field">
-                            <input type="text" required>
+                            <input type="text" id="contactar-nome" required>
                             <span></span>
                             <label>Nome</label>
                         </div>
                         <div class="txt_field">
-                            <input type="text" required>
+                            <input type="text" id="contactar-email" required>
                             <span></span>
                             <label>Email</label>
                         </div>
                         <div class="txt_field">
-                            <input type="text" required>
+                            <input type="text" id="contactar-pergunta" required>
                             <span></span>
                             <label>Assunto</label>
                         </div>
                         <input type="submit" value="Submeter">
                     </form>
+
                 </div>
+
                 <div class="direita">
                     <div>
                         <ul class="accordion">
                             <li>
                                 <input type="radio" name="accordion" id="first" checked />
-                                <label for="first">Produtos</label>
+                                <label for="first">Existe possibilidade de adicionar Luminárias?</label>
                                 <div class="content">
                                     <p>
-                                        Em linguística, a noção de texto é ampla e ainda aberta a uma definição mais precisa.
-                                        Grosso modo, pode ser entendido como manifestação linguística das ideias de um autor,
-                                        que serão interpretadas pelo leitor de acordo com seus conhecimentos linguísticos e culturais.
-                                        Seu tamanho é variável.
+                                        Sim, existe possibilidade de adicionar novas luminárias mas para isso terá de falar com a equipa Luxifer
+                                        para ser enviado o hardware necessário e adicionar as repetivas luminárias no software para o devido controlo.                             
                                     </p>
                                 </div>
                             </li>
                             <li>
                                 <input type="radio" name="accordion" id="second" />
-                                <label for="second">Informação</label>
+                                <label for="second">Só posso adicionar estas cores aos grupos?</label>
                                 <div class="content">
                                     <p>
-                                        Em linguística, a noção de texto é ampla e ainda aberta a uma definição mais precisa.
-                                        Grosso modo, pode ser entendido como manifestação linguística das ideias de um autor,
-                                        que serão interpretadas pelo leitor de acordo com seus conhecimentos linguísticos e culturais.
-                                        Seu tamanho é variável.
+                                       Atualmente só temos disponíveis estas cores para personalizar os seus grupos mas numa atualização futura
+                                       irão ser adicionadas novas cores.
                                     </p>
                                 </div>
                             </li>
                             <li>
                                 <input type="radio" name="accordion" id="third" />
-                                <label for="third">Questões</label>
+                                <label for="third">Como posso contactar a equipa Luxifer?</label>
                                 <div class="content">
                                     <p>
-                                        Em linguística, a noção de texto é ampla e ainda aberta a uma definição mais precisa.
-                                        Grosso modo, pode ser entendido como manifestação linguística das ideias de um autor,
-                                        que serão interpretadas pelo leitor de acordo com seus conhecimentos linguísticos e culturais.
-                                        Seu tamanho é variável.
+                                        A equipa Luxifer pode ser contactada via email preenchendo o forms que se encontra nesta página e via telefone para o número 
+                                        919919919, não exite em tirar as suas dúvidas e dar as suas sugestões ou feedback de eventuais erros.
                                     </p>
                                 </div>
                             </li>
                             <li>
                                 <input type="radio" name="accordion" id="fourth" />
-                                <label for="fourth">Guia</label>
+                                <label for="fourth">Existe algum manual de instruções para o Software?</label>
                                 <div class="content">
                                     <p>
-                                        Em linguística, a noção de texto é ampla e ainda aberta a uma definição mais precisa.
-                                        Grosso modo, pode ser entendido como manifestação linguística das ideias de um autor,
-                                        que serão interpretadas pelo leitor de acordo com seus conhecimentos linguísticos e culturais.
-                                        Seu tamanho é variável.
+                                        Sim existe, tendo sido entregue quando foi instalado o Software no seu sistema. Caso necessite do manual
+                                        e já não saiba do mesmo pode sempre contactar a equipa para ser enviado um novo manual.
                                     </p>
                                 </div>
                             </li>
                         </ul>
 
-
-
-
                     </div>
                 </div>
-               
-
-              
-            </div>
-
-            
-
-            
+                          
+            </div>       
         </main>
 
         <div class="right">
@@ -108,11 +94,37 @@
                     <span class="material-icons-sharp">dark_mode</span>
                 </div>
             </div>
-
-            
+          
         </div>
     </div>
+
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+
+    <script>
+        const nome = document.getElementById("contactar-nome");
+        const email = document.getElementById("contactar-email");
+        const pergunta = document.getElementById("contactar-pergunta");
+        const submit = document.getElementById("submit");
+
+        submit.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            Email.send({
+                SecureToken: "50e654bf-6cda-4c6f-8236-db845e4275cd",
+                To: "diogoferrfrancisco@gmail.com",
+                From: "diogoferrfrancisco@gmail.com",
+                Subject: "Pergunta Cliente",
+                Body: `Nome: ${nome.value} <br> Email: ${email.value} <br> Pergunta: ${pergunta.value}`,
+            }).then((message) => {
+                alert("Obrigado por nos contactar");           
+                nome.value = "";
+                email.value = "";
+                pergunta.value = "";
+            });
+        });
+    </script>
 </body>
+
 
 
 
